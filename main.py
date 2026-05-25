@@ -16,9 +16,10 @@ def load_keys():
 def check_license():
     UsAg = request.headers.get('User-Agent')
     user_key = request.args.get('key').strip()
-    
 
-    
+    if UsAg != usAg:
+        abort(403)
+
     valid_keys = load_keys()
     
     if user_key in valid_keys:
