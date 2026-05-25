@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 KF = "unknownBLAME.lic"
-usAg = "UsAgentCore-net3012.0daw"
+usAg = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0"
 
 def load_keys():
     if not os.path.exists(KF):
@@ -18,7 +18,8 @@ def load_keys():
 def check_license():
     UsAg = request.headers.get('User-Agent')
     user_key = request.args.get('key')
-
+    if UsAg != usAg:
+        abort(403) # Теперь это сработает четко!
     
     valid_keys = load_keys()
     
