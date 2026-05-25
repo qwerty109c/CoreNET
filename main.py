@@ -3,15 +3,12 @@ import os
 
 app = Flask(__name__)
 
-# Имя файла, где будут храниться ключи (по одному на строку)
-KEYS_FILE = "keys.txt"
+KEYS_FILE = "unknownBLAME.lic"
 
 def load_keys():
-    # Если файла еще нет, возвращаем пустой список
     if not os.path.exists(KEYS_FILE):
         return []
     
-    # Читаем файл и убираем лишние пробелы/переносы строк (\n)
     with open(KEYS_FILE, "r", encoding="utf-8") as f:
         return [line.strip() for line in f if line.strip()]
 
@@ -19,7 +16,6 @@ def load_keys():
 def check_license():
     user_key = request.args.get('key')
     
-    # Загружаем актуальный список ключей из файла
     valid_keys = load_keys()
     
     if user_key in valid_keys:
