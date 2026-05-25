@@ -1,4 +1,4 @@
-from flask import Flask, request, abort  # Обязательно должен быть abort!
+from flask import Flask, request, abort  
 import os
 
 app = Flask(__name__)
@@ -17,7 +17,6 @@ def check_license():
     UsAg = request.headers.get('User-Agent')
     user_key = request.args.get('key')
     
-    # Жесткая проверка User-Agent
     if UsAg != usAg:
         abort(403)
     
