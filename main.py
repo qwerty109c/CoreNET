@@ -15,7 +15,7 @@ def load_keys():
 @app.route('/check', methods=['GET'])
 def check_license():
     UsAg = request.headers.get('User-Agent')
-    user_key = request.args.get('key')
+    user_key = request.args.get('key').strip()
     
     if UsAg != usAg:
         abort(403)
