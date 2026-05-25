@@ -1,20 +1,25 @@
-from flask import Flask, request
+# Добавили abort в импорт в первую строчку, иначе сервер выдаст ошибку
+from flask import Flask, request, abort
 import os
 
 app = Flask(__name__)
 
-KEYS_FILE = "unknownBLAME.lic"
+KF = "unknownBLAME.lic"
+usAg = "UsAgentCore-net3012.0daw"
 
 def load_keys():
-    if not os.path.exists(KEYS_FILE):
+    if not os.path.exists(KF):
         return []
     
-    with open(KEYS_FILE, "r", encoding="utf-8") as f:
+    with open(KF, "r", encoding="utf-8") as f:
         return [line.strip() for line in f if line.strip()]
 
 @app.route('/check', methods=['GET'])
 def check_license():
+    UsAg = request.headers.get('User-Agent')
     user_key = request.args.get('key')
+    if UsAg != usAg:
+        abort(403) # Теперь это сработает четко!
     
     valid_keys = load_keys()
     
@@ -24,4 +29,5 @@ def check_license():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
+
 
