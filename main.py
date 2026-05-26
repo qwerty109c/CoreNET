@@ -3,14 +3,14 @@ import os
 
 app = Flask(__name__)
 
-KF = "unknownBLAME.lic"
 usAg = "UsAgentCore-net3012.0daw"
 
 def load_keys():
-    if not os.path.exists(KF):
-        return []
-    with open(KF, "r", encoding="utf-8") as f:
-        return [line.strip() for line in f if line.strip()]
+    keys_string = os.environ.get("LICENSE_KEYS", "")
+
+    if keys_string:
+        return [k.strip() for k in keys_string.split(",") if k.strip()]
+    return []
 
 @app.route('/check', methods=['GET'])
 def check_license():
