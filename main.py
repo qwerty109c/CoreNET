@@ -32,6 +32,7 @@ def home():
         <head><title>CoreNET Auth</title></head>
         <body style="font-family: Arial, sans-serif; text-align: center; margin-top: 50px;">
             <h1 style="color: #2c3e50;">Сервер авторизации CoreNET</h1>
+             <h1 style="color: #2c3e51;">Защита беслпатно!</h1>
             <p style="color: #7f8c8d;">Статус системы: <strong style="color: #27ae60;">ONLINE</strong></p>
         </body>
     </html>
